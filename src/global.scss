@@ -1,0 +1,520 @@
+
+@import "@ionic/angular/css/core.css";
+
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global styles */
+:root {
+  --ion-font-family: 'Inter', sans-serif;
+}
+
+* {
+  font-family: var(--ion-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--app-background-light);
+}
+
+/* Utility classes */
+.ion-margin-auto {
+  display: block;
+  margin: 0 auto;
+}
+
+.ion-text-center {
+  text-align: center;
+}
+
+/* Glass effect */
+.glass-effect {
+  background: var(--app-glass-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--app-glass-border);
+}
+
+/* Neomorphism effect */
+.neomorphism {
+  border-radius: var(--app-border-radius);
+  background: var(--app-card-background);
+  box-shadow: var(--app-neomorphism-shadow);
+}
+
+.neomorphism-pressed {
+  border-radius: var(--app-border-radius);
+  background: var(--app-card-background);
+  box-shadow: var(--app-neomorphism-pressed);
+}
+
+/* Card styles */
+ion-card {
+  border-radius: var(--app-border-radius);
+  box-shadow: var(--app-card-shadow);
+  border: var(--app-card-border);
+  margin: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+ion-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+ion-card-header {
+  padding: 20px 20px 10px;
+}
+
+ion-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  letter-spacing: -0.01em;
+}
+
+ion-card-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--app-text-secondary);
+  margin-top: 4px;
+}
+
+ion-card-content {
+  padding: 10px 20px 20px;
+  color: var(--app-text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Button styles */
+ion-button {
+  --border-radius: 12px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  height: 48px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+ion-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+ion-button:hover::after {
+  opacity: 1;
+}
+
+ion-button.btn-gradient-primary {
+  --background: var(--app-primary-gradient);
+  --background-hover: var(--app-primary-gradient);
+  --background-activated: var(--app-primary-gradient);
+  --background-focused: var(--app-primary-gradient);
+}
+
+ion-button.btn-gradient-secondary {
+  --background: var(--app-secondary-gradient);
+  --background-hover: var(--app-secondary-gradient);
+  --background-activated: var(--app-secondary-gradient);
+  --background-focused: var(--app-secondary-gradient);
+}
+
+ion-fab-button {
+  --border-radius: 50%;
+  --box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+ion-fab-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+ion-fab-button:hover::after {
+  opacity: 1;
+}
+
+/* Form styles */
+ion-item {
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --background: var(--app-card-background);
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--app-border-color);
+}
+
+ion-input, ion-textarea {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-size: 16px;
+  --background: var(--app-background-light);
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+ion-label {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--app-text-primary);
+  margin-bottom: 4px;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounceIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Task status styles */
+.task-pending {
+  background: var(--app-pending-task-bg);
+  border-left: 4px solid var(--app-pending-task-color);
+}
+
+.task-completed {
+  background: var(--app-completed-task-bg);
+  border-left: 4px solid var(--app-completed-task-color);
+}
+
+/* Empty state styles */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-state ion-icon {
+  font-size: 80px;
+  color: var(--app-text-tertiary);
+  margin-bottom: 24px;
+  opacity: 0.7;
+}
+
+.empty-state h4 {
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--app-text-primary);
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  color: var(--app-text-secondary);
+  max-width: 300px;
+  margin: 0 auto 32px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Loading spinner */
+ion-spinner {
+  display: block;
+  margin: 20px auto;
+  width: 48px;
+  height: 48px;
+  color: var(--app-primary-color);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Toast styles */
+ion-toast {
+  --border-radius: 12px;
+  --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --width: auto;
+  --min-width: 250px;
+  --max-width: 90%;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Toolbar styles */
+ion-toolbar {
+  --background: var(--app-primary-gradient);
+  --color: white;
+  --border-width: 0;
+  --min-height: 60px;
+  padding: 4px 0;
+}
+
+ion-toolbar ion-title {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+
+ion-toolbar ion-button {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  height: 40px;
+}
+
+/* Checkbox styles */
+ion-checkbox {
+  --size: 24px;
+  --border-radius: 6px;
+  --border-width: 2px;
+  --border-color: var(--app-text-tertiary);
+  --background: transparent;
+  --background-checked: var(--app-primary-gradient);
+  --border-color-checked: var(--app-primary-color);
+  --checkmark-color: white;
+  margin-right: 12px;
+  transition: all 0.2s ease;
+}
+
+/* Segment styles */
+ion-segment {
+  --background: var(--app-background-light);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--app-border-color);
+  overflow: hidden;
+}
+
+ion-segment-button {
+  --color: var(--app-text-secondary);
+  --color-checked: white;
+  --color-hover: var(--app-text-primary);
+  --background-checked: var(--app-primary-gradient);
+  --indicator-color: transparent;
+  --border-radius: 10px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  transition: all 0.3s ease;
+  min-height: 40px;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.badge-primary {
+  background: var(--app-primary-gradient);
+  color: white;
+}
+
+.badge-success {
+  background: var(--app-completed-task-gradient);
+  color: white;
+}
+
+.badge-warning {
+  background: var(--app-pending-task-gradient);
+  color: white;
+}
+
+/* Ripple effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+/* Skeleton loading */
+.skeleton-text {
+  height: 16px;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* Custom alert styles */
+.custom-alert {
+  --backdrop-opacity: 0.6;
+  --border-radius: 16px;
+}
+
+.custom-alert .alert-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.custom-alert .alert-head {
+  padding-top: 20px;
+}
+
+.custom-alert .alert-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.custom-alert .alert-message {
+  font-size: 15px;
+  color: var(--app-text-secondary);
+}
+
+.custom-alert .alert-button-group {
+  padding: 16px;
+}
+
+.custom-alert .alert-button {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px 16px;
+}
+
+/* Custom loading styles */
+.custom-loading {
+  --backdrop-opacity: 0.3;
+  --spinner-color: var(--app-primary-color);
+  --background: var(--app-card-background);
+  --border-radius: 16px;
+  --box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+  color: var(--app-text-primary);
+}
+
+/* Custom toast styles */
+.custom-toast {
+  font-weight: 600;
+  --border-radius: 12px;
+  --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+

@@ -1,0 +1,35 @@
+<ion-card class="task-card animate-in" [ngClass]="{'completed-task': task.done}">
+  <div class="card-header">
+    <div class="priority-indicator" [ngClass]="getPriorityClass()"></div>
+    <h2 class="task-title">{{ task.title }}</h2>
+    <div class="task-date">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>{{ task.date | dateFormat }}</span>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <p class="task-description">{{ task.description }}</p>
+    <div class="task-status-badge">
+      <ion-icon [name]="task.done ? 'checkmark-circle-outline' : 'time-outline'"></ion-icon>
+      {{ task.done ? 'Completada' : 'Pendiente' }}
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <div class="task-checkbox">
+      <ion-checkbox [checked]="task.done" (ionChange)="onToggleStatus()"></ion-checkbox>
+      <span class="checkbox-label">{{ task.done ? 'Marcar como pendiente' : 'Marcar como completada' }}</span>
+    </div>
+    
+    <div class="action-buttons">
+      <ion-button fill="clear" color="primary" (click)="onEditTask()">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="onDeleteTask()">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-card>
+

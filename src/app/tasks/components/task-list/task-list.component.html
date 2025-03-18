@@ -1,0 +1,82 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="toolbar-content">
+      <div class="title-container">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <span>Mis Tareas</span>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button (click)="toggleDarkMode()" class="theme-button">
+          <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshTasks($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="task-container">
+    <div class="task-header">
+      <div class="date-info">
+        <h2>{{ today | date:'EEEE, d MMMM' }}</h2>
+        <div class="task-count">
+          <ion-icon name="list-outline"></ion-icon>
+          <p>{{ pendingTasksCount }} tareas pendientes</p>
+        </div>
+      </div>
+      <div class="search-bar">
+        <ion-searchbar placeholder="Buscar tareas..." [(ngModel)]="searchTerm" (ionChange)="filterTasks()" animated="true"></ion-searchbar>
+      </div>
+    </div>
+
+    <ion-segment [(ngModel)]="currentFilter" (ionChange)="filterTasks()" mode="ios">
+      <ion-segment-button value="all">
+        <ion-label>Todas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pending">
+        <ion-label>Pendientes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-label>Completadas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="task-list" *ngIf="!loading && filteredTasks.length > 0">
+      <app-task-card 
+        *ngFor="let task of filteredTasks; trackBy: trackByFn" 
+        [task]="task"
+        (toggleStatus)="onToggleTaskStatus($event)"
+        (editTask)="onEditTask($event)"
+        (deleteTask)="onDeleteTask($event)">
+      </app-task-card>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && filteredTasks.length === 0">
+      <ion-icon name="list-outline"></ion-icon>
+      <h4>No hay tareas {{ getEmptyStateMessage() }}</h4>
+      <p>{{ getEmptyStateDescription() }}</p>
+      <ion-button expand="block" (click)="onCreateTask()" class="btn-gradient-primary create-button">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Crear Nueva Tarea
+      </ion-button>
+    </div>
+
+    <div class="loading-container" *ngIf="loading">
+      <div class="loading-card">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Cargando tareas...</p>
+      </div>
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="onCreateTask()" class="fab-button">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+

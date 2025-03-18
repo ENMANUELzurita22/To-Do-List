@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <div class="title-container">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Detalle de Tarea</span>
+    </div>
+    <ion-buttons slot="end" *ngIf="task">
+      <ion-button (click)="onEdit()" class="edit-button">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-card">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando tarea...</p>
+    </div>
+  </div>
+
+  <div class="detail-container" *ngIf="!loading && task">
+    <ion-card class="detail-card">
+      <div class="card-header" [ngClass]="task.done ? 'completed' : 'pending'">
+        <div class="status-badge">
+          <ion-icon [name]="task.done ? 'checkmark-circle-outline' : 'time-outline'"></ion-icon>
+          {{ task.done ? 'Completada' : 'Pendiente' }}
+        </div>
+        <h1 class="task-title">{{ task.title }}</h1>
+        <div class="task-date">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ task.date | dateFormat }}</span>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <div class="detail-section">
+          <h3>Descripción</h3>
+          <p class="task-description">{{ task.description }}</p>
+        </div>
+        
+        <div class="action-buttons">
+          <ion-button expand="block" (click)="onToggleStatus()" [color]="task.done ? 'warning' : 'success'" class="status-button">
+            <ion-icon [name]="task.done ? 'refresh-outline' : 'checkmark-outline'" slot="start"></ion-icon>
+            {{ task.done ? 'Marcar como pendiente' : 'Marcar como completada' }}
+          </ion-button>
+          
+          <div class="button-group">
+            <ion-button expand="block" (click)="onEdit()" color="primary" class="edit-task-button">
+              <ion-icon name="create-outline" slot="start"></ion-icon>
+              Editar tarea
+            </ion-button>
+            
+            <ion-button expand="block" (click)="onDelete()" color="danger" class="delete-button">
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              Eliminar tarea
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>
+

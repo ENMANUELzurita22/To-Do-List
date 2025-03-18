@@ -1,0 +1,79 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="animate-form">
+  <ion-card class="form-card">
+    <div class="form-header">
+      <div class="header-content">
+        <h2 class="form-title">{{ isEditMode ? 'Editar' : 'Nueva' }} Tarea</h2>
+        <p class="form-subtitle">{{ isEditMode ? 'Modifica los detalles de la tarea' : 'Completa los detalles para crear una tarea' }}</p>
+      </div>
+      <div class="header-icon">
+        <ion-icon [name]="isEditMode ? 'create-outline' : 'add-circle-outline'"></ion-icon>
+      </div>
+    </div>
+
+    <div class="form-content">
+      <div class="form-group">
+        <ion-label>Título <span class="required">*</span></ion-label>
+        <ion-item class="form-control">
+          <ion-input formControlName="title" type="text" placeholder="Ej: Comprar víveres"></ion-input>
+        </ion-item>
+        <div class="error-container" *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+          <div class="error-message">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <span>El título es obligatorio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <ion-label>Descripción <span class="required">*</span></ion-label>
+        <ion-item class="form-control">
+          <ion-textarea formControlName="description" rows="4" placeholder="Ej: Comprar leche, pan, huevos..."></ion-textarea>
+        </ion-item>
+        <div class="error-container" *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched">
+          <div class="error-message">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <span>La descripción es obligatoria</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <ion-label>Fecha <span class="required">*</span></ion-label>
+        <ion-item class="form-control">
+          <ion-input formControlName="date" type="date"></ion-input>
+        </ion-item>
+        <div class="error-container" *ngIf="taskForm.get('date')?.invalid && taskForm.get('date')?.touched">
+          <div class="error-message">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <span>La fecha es obligatoria</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="isEditMode">
+        <div class="status-toggle">
+          <ion-label>Estado de la tarea</ion-label>
+          <ion-item class="form-control status-item">
+            <ion-checkbox formControlName="done" slot="start"></ion-checkbox>
+            <ion-label>{{ taskForm.get('done')?.value ? 'Completada' : 'Pendiente' }}</ion-label>
+            <div class="status-badge" [ngClass]="taskForm.get('done')?.value ? 'completed' : 'pending'">
+              {{ taskForm.get('done')?.value ? 'Completada' : 'Pendiente' }}
+            </div>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <ion-button expand="block" type="submit" [disabled]="taskForm.invalid" class="btn-gradient-primary submit-button">
+          <ion-icon [name]="isEditMode ? 'save-outline' : 'add-outline'" slot="start"></ion-icon>
+          {{ isEditMode ? 'Actualizar' : 'Crear' }} Tarea
+        </ion-button>
+        <ion-button expand="block" type="button" fill="outline" (click)="onCancel()" class="cancel-button">
+          <ion-icon name="close-outline" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
+</form>
+

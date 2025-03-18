@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <div class="title-container">
+      <ion-icon name="create-outline"></ion-icon>
+      <span>Editar Tarea</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-card">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando tarea...</p>
+    </div>
+  </div>
+
+  <div class="form-container" *ngIf="!loading && task">
+    <app-task-form 
+      [task]="task"
+      (formSubmit)="onSubmit($event)"
+      (formCancel)="onCancel()">
+    </app-task-form>
+  </div>
+</ion-content>
+

@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <div class="title-container">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <span>Nueva Tarea</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="form-container">
+    <app-task-form 
+      (formSubmit)="onSubmit($event)"
+      (formCancel)="onCancel()">
+    </app-task-form>
+  </div>
+</ion-content>
+

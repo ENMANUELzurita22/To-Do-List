@@ -1,0 +1,193 @@
+.task-card {
+  margin: 16px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  
+  &.completed-task {
+    background: var(--app-completed-task-bg);
+    border-left: 4px solid var(--app-completed-task-color);
+    
+    .task-title, .task-date, .task-description {
+      text-decoration: line-through;
+      color: var(--app-text-secondary);
+      opacity: 0.8;
+    }
+    
+    .task-status-badge {
+      background: var(--app-completed-task-gradient);
+    }
+  }
+  
+  &:not(.completed-task) {
+    background: var(--app-pending-task-bg);
+    border-left: 4px solid var(--app-pending-task-color);
+    
+    .task-status-badge {
+      background: var(--app-pending-task-gradient);
+    }
+  }
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.card-header {
+  padding: 20px 20px 10px;
+  position: relative;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.task-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--app-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+.card-content {
+  padding: 0 20px 20px;
+}
+
+.task-description {
+  color: var(--app-text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  
+  ion-icon {
+    margin-right: 4px;
+    font-size: 14px;
+  }
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--app-border-color);
+}
+
+.task-checkbox {
+  display: flex;
+  align-items: center;
+  
+  ion-checkbox {
+    --size: 22px;
+    --border-radius: 6px;
+    margin-right: 10px;
+  }
+  
+  .checkbox-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--app-text-secondary);
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  
+  ion-button {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+    height: 36px;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.animate-in {
+  animation: cardFadeIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes cardFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+.priority-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  
+  &.high {
+    background-color: var(--ion-color-danger);
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  }
+  
+  &.medium {
+    background-color: var(--ion-color-warning);
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+  }
+  
+  &.low {
+    background-color: var(--ion-color-success);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  }
+}
+
